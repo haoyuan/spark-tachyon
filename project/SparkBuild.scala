@@ -86,7 +86,7 @@ object SparkBuild extends Build {
     organization := "org.apache.spark",
     version := "0.8.0-incubating",
     scalaVersion := "2.9.3",
-    scalacOptions := Seq("-unchecked", "-optimize", "-deprecation", 
+    scalacOptions := Seq("-unchecked", "-optimize", "-deprecation",
       "-target:" + SCALAC_JVM_VERSION),
     javacOptions := Seq("-target", JAVAC_JVM_VERSION, "-source", JAVAC_JVM_VERSION),
     unmanagedJars in Compile <<= baseDirectory map { base => (base / "lib" ** "*.jar").classpath },
@@ -165,7 +165,7 @@ object SparkBuild extends Build {
       "org.scalacheck" %% "scalacheck" % "1.10.0" % "test",
       "com.novocode" % "junit-interface" % "0.9" % "test",
       "org.easymock" % "easymock" % "3.1" % "test",
-      "org.tachyonproject" % "tachyon" % "0.3.0-SNAPSHOT" excludeAll(excludeJackson, excludeNetty, excludeAsm)
+      "org.tachyonproject" % "tachyon" % "0.5.0-SNAPSHOT" excludeAll(excludeJackson, excludeNetty, excludeAsm)
     ),
     /* Workaround for issue #206 (fixed after SBT 0.11.0) */
     watchTransitiveSources <<= Defaults.inDependencies[Task[Seq[File]]](watchSources.task,

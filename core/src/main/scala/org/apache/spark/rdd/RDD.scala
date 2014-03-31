@@ -848,7 +848,7 @@ abstract class RDD[T: ClassManifest](
       val data = new ArrayList[ByteBuffer]()
       data.add(sc.env.closureSerializer.newInstance().serialize(this))
       val dependencyId = sc.env.tachyonFS.createDependency(parents, children, cmd, data,
-        "comment", "Spark", "v0.8.0-SNAPSHOT", tachyon.DependencyType.Wide.getValue(),
+        "comment", "Spark", "v0.8.0-SNAPSHOT", tachyon.master.DependencyType.Wide.getValue(),
         tachyon.Constants.MB * 512)
 
       // val clientDependencyInfo = sc.env.tachyonFS.getClientDependencyInfo(dependencyndencyId)
@@ -945,7 +945,7 @@ abstract class RDD[T: ClassManifest](
     val data = new ArrayList[ByteBuffer]()
     data.add(sc.env.closureSerializer.newInstance().serialize(this))
     val dependencyId = sc.env.tachyonFS.createDependency(parents, children, cmd, data,
-      "comment", "Spark", "v0.8.0-SNAPSHOT", tachyon.DependencyType.Wide.getValue(),
+      "comment", "Spark", "v0.8.0-SNAPSHOT", tachyon.master.DependencyType.Wide.getValue(),
       tachyon.Constants.MB * 512)
 
     val clientDependencyInfo = sc.env.tachyonFS.getClientDependencyInfo(dependencyId)
