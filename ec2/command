@@ -1,0 +1,2 @@
+./spark-ec2 -k StreamingSpark -i /home/haoyuan/aws/StreamingSpark.pem --instance-type=cr1.8xlarge --spot-price=3.5 -z us-east-1e -s 20 launch HP10
+

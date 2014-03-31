@@ -1,0 +1,2 @@
+sudo mount -t ramfs -o size=300mb ramfs /home/haoyuan/Tachyon/spark/examples/target/ ;
+sudo chmod a+w examples/target/ ;
