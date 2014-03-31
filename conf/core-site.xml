@@ -11,6 +11,16 @@
 </property>
 
 <property>
+  <name>dfs.block.size</name>
+  <value>536870912</value>
+</property>
+
+<property>
+  <name>fs.local.block.size</name>
+  <value>536870912</value>
+</property>
+
+<property>
   <name>fs.default.name</name>
   <value>tachyon://localhost:19998</value>
   <description>The name of the default file system.  A URI whose

@@ -840,7 +840,8 @@ abstract class RDD[T: ClassManifest](
         parents.add(inputPath.substring(path.find("19998") + 5))
       }
       val children = new ArrayList[java.lang.String]()
-      val cmd = "/root/spark/run-example org.apache.spark.TachyonRecompute " + sc.master
+//      val cmd = "/root/spark/run-example org.apache.spark.TachyonRecompute " + sc.master
+      val cmd = "/home/haoyuan/Tachyon/spark-tachyon/run-example org.apache.spark.TachyonRecompute " + sc.master
 
       for (i <- 0 until partitions.size) {
         children.add(path.substring(path.find("19998") + 5) + "/part_" + i);
@@ -863,7 +864,7 @@ abstract class RDD[T: ClassManifest](
   }
 
   def saveAsTextFileTachyonRecompute(tachyonAddr: String, depId: Int, recomputes: ArrayBuffer[Int]) {
-    var qualifiedPath = "tachyon://" + tachyonAddr + "/tachyon_recompute/" + depId
+    var qualifiedPath = tachyonAddr + "/tachyon_recompute/" + depId
 
     System.out.println("Qualified Path : " + qualifiedPath)
     var tempRdd = this.map(x => (NullWritable.get(), new Text(x.toString)))

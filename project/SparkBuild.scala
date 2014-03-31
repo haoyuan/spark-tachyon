@@ -42,23 +42,25 @@ object SparkBuild extends Build {
   lazy val core = Project("core", file("core"), settings = coreSettings)
 
   lazy val repl = Project("repl", file("repl"), settings = replSettings)
-    .dependsOn(core, bagel, mllib)
+    .dependsOn(core, bagel)
 
   lazy val examples = Project("examples", file("examples"), settings = examplesSettings)
-    .dependsOn(core, mllib, bagel, streaming)
+    .dependsOn(core, bagel)
 
-  lazy val tools = Project("tools", file("tools"), settings = toolsSettings) dependsOn(core) dependsOn(streaming)
+  lazy val tools = Project("tools", file("tools"), settings = toolsSettings) dependsOn(core)
 
   lazy val bagel = Project("bagel", file("bagel"), settings = bagelSettings) dependsOn(core)
 
-  lazy val streaming = Project("streaming", file("streaming"), settings = streamingSettings) dependsOn(core)
+  // lazy val streaming = Project("streaming", file("streaming"), settings = streamingSettings) dependsOn(core)
 
-  lazy val mllib = Project("mllib", file("mllib"), settings = mllibSettings) dependsOn(core)
+  // lazy val mllib = Project("mllib", file("mllib"), settings = mllibSettings) dependsOn(core)
 
   lazy val yarn = Project("yarn", file("yarn"), settings = yarnSettings) dependsOn(core)
 
   lazy val assemblyProj = Project("assembly", file("assembly"), settings = assemblyProjSettings)
-    .dependsOn(core, bagel, mllib, repl, streaming) dependsOn(maybeYarn: _*)
+    .dependsOn(core, bagel, repl) dependsOn(maybeYarn: _*)
+    // .dependsOn(core, bagel, mllib, repl, streaming) dependsOn(maybeYarn: _*)
+
 
   // A configuration to set an alternative publishLocalConfiguration
   lazy val MavenCompile = config("m2r") extend(Compile)
@@ -75,7 +77,9 @@ object SparkBuild extends Build {
   lazy val maybeYarn = if(isYarnEnabled) Seq[ClasspathDependency](yarn) else Seq[ClasspathDependency]()
   lazy val maybeYarnRef = if(isYarnEnabled) Seq[ProjectReference](yarn) else Seq[ProjectReference]()
   lazy val allProjects = Seq[ProjectReference](
-    core, repl, examples, bagel, streaming, mllib, tools, assemblyProj) ++ maybeYarnRef
+    core, repl, examples, bagel, tools, assemblyProj) ++ maybeYarnRef
+    // core, repl, examples, bagel, streaming, mllib, tools, assemblyProj) ++ maybeYarnRef
+
 
   val excludeJackson = ExclusionRule(organization = "org.codehaus.jackson")
   val excludeNetty = ExclusionRule(organization = "org.jboss.netty")
